@@ -25,10 +25,10 @@ export class Stack {
   }
 
   peek() {
-    const { _store } = this;
+    const { _store, isEmpty } = this;
 
-    if (this.isEmpty()) {
-      throw new Error("Stack is empty");
+    if (isEmpty()) {
+      return null
     }
 
     return _store[_store.length - 1];
