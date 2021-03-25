@@ -15,9 +15,9 @@ export class Stack {
   }
 
   pop() {
-    const { _store } = this;
+    const { _store, isEmpty } = this;
 
-    if (this.isEmpty()) {
+    if (isEmpty()) {
       throw new Error("Stack is empty");
     }
 
@@ -39,16 +39,18 @@ export class Stack {
   }
 
   toArray() {
+    const { _store, isEmpty } = this;
+
     const output = [];
 
-    while (!this.isEmpty()) {
-      output.push(this._store.pop());
+    while (!isEmpty()) {
+      output.push(_store.pop());
     }
 
     output
       .concat()
       .reverse()
-      .forEach((el) => this._store.push(el));
+      .forEach((el) => _store.push(el));
 
     return output;
   }
