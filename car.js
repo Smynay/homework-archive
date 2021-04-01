@@ -1,39 +1,51 @@
 class Car{
-  constructor(){
-    this._brand = '';
-    this._model = '';
-    this._yearOfManufacturing = 1900;
-    this._maxSpeed = 100;
-    this._maxFuelVolume = 5;
-    this._fuelConsumption = 1;
-    this._currentFuelVolume = 0;
-    this._isStarted = false;
-    this._mileage = 0;
+  #brand;
+  #model;
+  #yearOfManufacturing;
+  #maxSpeed;
+  #maxFuelVolume;
+  #fuelConsumption;
+  #currentFuelVolume;
+  #isStarted;
+  #mileage;
+
+  constructor(){ 
+    this.#currentFuelVolume = 0;
+    this.#isStarted = false;
+    this.#mileage = 0;
   }
 
   start(){
-    if(this._isStarted){
+    if(!this.#currentFuelVolume){
+      throw new Error('Car cant be started, check fuel');
+    }
+
+    if(this.#isStarted){
       throw new Error('Car already started');
     }
     
-    this._isStarted = true;
+    this.#isStarted = true;
   }
 
   shutDownEngine(){
-    if(!this._isStarted){
+    if(!this.#isStarted){
       throw new Error('Car is not started yet');
     }
     
-    this._isStarted = false;
+    this.#isStarted = false;
   }
 
   fillUpGasTank(gasCount){
     if(this.checkNumberValidity(gasCount)){
-      if(this._currentFuelVolume + gasCount > this._maxFuelVolume){
+      if(!this.#maxFuelVolume){
+        throw new Error('Invalid max fuel volume');
+      }
+
+      if(this.#currentFuelVolume + gasCount > this.#maxFuelVolume){
         throw new Error('Gas tank is full');
       }
 
-      this._currentFuelVolume += gasCount;
+      this.#currentFuelVolume += gasCount;
     } else {
       throw new Error('Invalid gas count')
     }
@@ -48,23 +60,31 @@ class Car{
       throw new Error('Invalid hours count')
     }
 
-    if(this._maxSpeed < speed){
+    if(this.#maxSpeed < speed){
       throw new Error('Car cant drive so fast');
     }
 
-    if(!this._isStarted){
+    if(!this.#isStarted){
       throw new Error('Car should be started for driving');
     }
 
-    const roadMiles = speed * hours;
-    const roadGas =  roadMiles * (this._fuelConsumption / 100);
+    if(!this.#fuelConsumption){
+      throw new Error('Invalid fuel consumption');
+    }
 
-    if(this._currentFuelVolume < roadGas){
+    if(!this.#maxSpeed){
+      throw new Error('Invalid max speed');
+    }
+
+    const roadMiles = speed * hours;
+    const roadGas =  roadMiles * (this.#fuelConsumption / 100);
+
+    if(this.#currentFuelVolume < roadGas){
       throw new Error('Not enough fuel');
     }
 
-    this._currentFuelVolume = roadGas;
-    this._mileage += roadMiles;
+    this.#currentFuelVolume -= roadGas;
+    this.#mileage += roadMiles;
 
   }
 
@@ -77,39 +97,39 @@ class Car{
   }
 
   get brand(){
-    return this._brand;
+    return this.#brand;
   }
 
   get model(){
-    return this._model;
+    return this.#model;
   }
 
   get yearOfManufacturing(){
-    return this._yearOfManufacturing;
+    return this.#yearOfManufacturing;
   }
 
   get maxSpeed(){
-    return this._maxSpeed;
+    return this.#maxSpeed;
   }
 
   get maxFuelVolume(){
-    return this._maxFuelVolume;
+    return this.#maxFuelVolume;
   }
 
   get fuelConsumption(){
-    return this._fuelConsumption;
+    return this.#fuelConsumption;
   }
 
   get currentFuelVolume(){
-    return this._currentFuelVolume;
+    return this.#currentFuelVolume;
   }
 
   get isStarted(){
-    return this._isStarted;
+    return this.#isStarted;
   }
 
   get mileage(){
-    return this._mileage;
+    return this.#mileage;
   }
 
   set brand(value){
@@ -117,7 +137,7 @@ class Car{
       throw new Error('Invalid brand name')
     }
 
-    this._brand = value;
+    this.#brand = value;
   }
 
   set model(value){
@@ -125,7 +145,7 @@ class Car{
       throw new Error('Invalid model name')
     }
 
-    this._model = value;
+    this.#model = value;
   }
 
   set yearOfManufacturing(value){
@@ -133,7 +153,7 @@ class Car{
       throw new Error('Invalid year of manufacturing');
     }
 
-    this._yearOfManufacturing = value;
+    this.#yearOfManufacturing = value;
   }
 
   set maxSpeed(value){
@@ -141,7 +161,7 @@ class Car{
       throw new Error('Invalid max speed');
     }
 
-    this._maxSpeed = value;
+    this.#maxSpeed = value;
   }
 
   set maxFuelVolume(value){
@@ -149,7 +169,7 @@ class Car{
       throw new Error('Invalid max fuel volume');
     }
 
-    this._maxFuelVolume = value;
+    this.#maxFuelVolume = value;
   }
 
   set fuelConsumption(value){
@@ -157,7 +177,7 @@ class Car{
       throw new Error('Invalid fuel consumption');
     }
 
-    this._fuelConsumption = value;
+    this.#fuelConsumption = value;
   }
 
 
