@@ -9,10 +9,41 @@ class Car{
   #isStarted;
   #mileage;
 
-  constructor(){ 
-    this.#currentFuelVolume = 0;
-    this.#isStarted = false;
-    this.#mileage = 0;
+  constructor(
+    brand,
+    model,
+    yearOfManufacturing,
+    maxSpeed,
+    maxFuelVolume,
+    fuelConsumption,
+    currentFuelVolume = 0,
+    isStarted = false,
+    mileage = 0
+  ){
+    this.brand = brand;
+    this.model = model;
+    this.yearOfManufacturing = yearOfManufacturing;
+    this.maxSpeed = maxSpeed;
+    this.maxFuelVolume = maxFuelVolume;
+    this.fuelConsumption = fuelConsumption;
+
+    if(this.checkNumberValidity(currentFuelVolume, true) && currentFuelVolume <= this.maxFuelVolume){
+      this.#currentFuelVolume = currentFuelVolume;
+    } else {
+      throw new Error('Invalid current fuel volume');
+    }
+
+    if(typeof isStarted == 'boolean'){
+      this.#isStarted = isStarted;
+    } else {
+      throw new Error('Invalid isStarted parameter');
+    }
+
+    if(this.checkNumberValidity(mileage, true)){
+      this.#mileage = mileage;
+    } else {
+      throw new Error('Invalid mileage')
+    }
   }
 
   start(){
@@ -85,12 +116,19 @@ class Car{
 
     this.#currentFuelVolume -= roadGas;
     this.#mileage += roadMiles;
-
   }
 
-  checkNumberValidity(number){
-    if(typeof number == 'number' && number != NaN && number > 0 && number != Infinity){
-      return true;
+  checkNumberValidity(number, canBeZero = false){
+    if(typeof number == 'number' && number != NaN && number >= 0 && number != Infinity){
+      if(canBeZero){
+        return true;
+      }
+
+      if(number > 0){
+        return true;
+      }
+      
+      return false;
     }
 
     return false;
@@ -133,54 +171,52 @@ class Car{
   }
 
   set brand(value){
-    if(typeof value != 'string' || 0 >= value.length || value.length > 50){
-      throw new Error('Invalid brand name')
+    if(typeof value == 'string' && value.length > 0 && value.length <= 50){
+      this.#brand = value;
+    } else {
+      throw new Error('Invalid brand name');
     }
-
-    this.#brand = value;
   }
 
   set model(value){
-    if(typeof value != 'string' || 0 >= value.length || value.length > 50){
-      throw new Error('Invalid model name')
+    if(typeof value == 'string' && value.length > 0 && value.length <= 50){
+      this.#model = value;
+    } else {
+      throw new Error('Invalid model name');
     }
-
-    this.#model = value;
   }
 
   set yearOfManufacturing(value){
-    if(!this.checkNumberValidity(value) || 1900 > value || value > 2021){
+    if(this.checkNumberValidity(value) && 1900 <= value && value <= 2021){
+      this.#yearOfManufacturing = value;
+    } else {
       throw new Error('Invalid year of manufacturing');
-    }
-
-    this.#yearOfManufacturing = value;
+    }   
   }
 
   set maxSpeed(value){
-    if(!this.checkNumberValidity(value) || 100 > value || value > 300){
+    if(this.checkNumberValidity(value) && 100 <= value && value <= 300){
+      this.#maxSpeed = value;
+    } else {
       throw new Error('Invalid max speed');
     }
-
-    this.#maxSpeed = value;
   }
 
   set maxFuelVolume(value){
-    if(!this.checkNumberValidity(value) || 5 > value || value > 20){
+    if(this.checkNumberValidity(value) && 5 <= value && value <= 20){
+      this.#maxFuelVolume = value;
+    } else {
       throw new Error('Invalid max fuel volume');
     }
-
-    this.#maxFuelVolume = value;
   }
 
   set fuelConsumption(value){
-    if(!this.checkNumberValidity(value)){
+    if(this.checkNumberValidity(value)){
+      this.#fuelConsumption = value;
+    } else {
       throw new Error('Invalid fuel consumption');
     }
-
-    this.#fuelConsumption = value;
   }
-
-
 }
 
 module.exports = Car;
