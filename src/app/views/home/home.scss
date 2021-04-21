@@ -1,0 +1,10 @@
+.home {
+  height: 100%;
+
+  &__main {
+    flex: 1 1;
+    background: url(../../../assets/background.jpg) #fff;
+    background-size: 300px;
+    background-position: center;
+  }
+}
