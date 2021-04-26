@@ -9,8 +9,8 @@ export function Header() {
           <img src={beer} width="30" height="30" className="d-inline-block align-top mr-2" alt="" />
           Real PunkBeer
         </a>
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Sign-In
+        <button className="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#signUpModal">
+          Sign-Up
         </button>
       </nav>
     </header>

@@ -7,6 +7,7 @@ import { Footer } from "../../components/footer/footer.jsx";
 
 import { fetchBeers } from "../../services/beerApi.jsx";
 import { Card } from "../../components/card/card";
+import { SignUpModal } from "../../components/modal/sign-up";
 
 export function HomePage() {
   const [beers, setBeers] = useState([]);
@@ -54,6 +55,7 @@ export function HomePage() {
   return (
     <div className="home d-flex flex-column">
       <Header className="home__header" />
+      <SignUpModal />
       <main className="home__main">
         <div className="main__container container-lg mx-auto bg-dark rounded-lg shadow-lg p-3 px-5 my-5">
           <div className="main__header row">
