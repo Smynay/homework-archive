@@ -1,3 +1,5 @@
+import Basic from "../forms/register/register-form";
+
 export function SignUpModal() {
   return (
     <div className="modal fade" id="signUpModal" tabIndex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
@@ -11,14 +13,8 @@ export function SignUpModal() {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div className="modal-body">...</div>
-          <div className="modal-footer d-flex justify-content-between">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">
-              Close
-            </button>
-            <button type="button" className="btn btn-warning">
-              Register
-            </button>
+          <div className="modal-body">
+            <Basic/>
           </div>
         </div>
       </div>
