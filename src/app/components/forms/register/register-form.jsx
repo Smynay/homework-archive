@@ -1,18 +1,18 @@
-import { Formik } from 'formik';
- 
-const Basic = () => (
+import { Formik } from "formik";
+
+const SignUpForm = () => (
   <>
     <Formik
-      initialValues={{ name: '', surname: '', birthDate: '', email: '', password: '' }}
-      validate={values => {
+      initialValues={{ name: "", surname: "", birthDate: "", email: "", password: "" }}
+      validate={(values) => {
         const errors = {};
 
         if (!values.name) {
-          errors.email = 'Required';
+          errors.email = "Required";
         }
 
         if (!values.surname) {
-          errors.email = 'Required';
+          errors.email = "Required";
         }
 
         if (!values.birthDate) {
@@ -20,22 +20,16 @@ const Basic = () => (
         }
 
         if (!values.email) {
-          errors.email = 'Required';
-        } else if (
-          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-          errors.email = 'Invalid email address';
+          errors.email = "Required";
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+          errors.email = "Invalid email address";
         }
 
         if (!values.password) {
-          errors.password = 'Required';
-        } else if (
-          values.password.trim().length <= 6
-        ) {
+          errors.password = "Required";
+        } else if (values.password.trim().length <= 6) {
           errors.password = "Minimum is 6 symbols";
-        } else if (
-          /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/g.test(values.password)
-        ) {
+        } else if (/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/g.test(values.password)) {
           errors.password = "Pasword shuld contain numbers, upper & lower case letters";
         }
 
@@ -48,16 +42,7 @@ const Basic = () => (
         }, 400);
       }}
     >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-        /* and other goodies */
-      }) => (
+      {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
         <form onSubmit={handleSubmit}>
           <label for="inputName">Name</label>
           <input
@@ -122,5 +107,5 @@ const Basic = () => (
     </Formik>
   </>
 );
- 
-export default Basic;
+
+export default SignUpForm;

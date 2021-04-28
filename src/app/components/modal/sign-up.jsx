@@ -1,4 +1,4 @@
-import Basic from "../forms/register/register-form";
+import SignUpForm from "../forms/register/register-form";
 
 export function SignUpModal() {
   return (
@@ -14,7 +14,7 @@ export function SignUpModal() {
             </button>
           </div>
           <div className="modal-body">
-            <Basic/>
+            <SignUpForm />
           </div>
         </div>
       </div>
