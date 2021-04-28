@@ -1,10 +1,7 @@
-const apiEndpoint = "https://api.punkapi.com/v2/";
-const beerEndpoint = apiEndpoint + "beers";
+import { BEER_ENDPOINT } from "../constants";
 
-function fetchBeers() {
-  return fetch(beerEndpoint)
+export function fetchBeers() {
+  return fetch(BEER_ENDPOINT)
     .then((response) => response.json())
     .then((result) => result);
 }
-
-module.exports = { fetchBeers };
