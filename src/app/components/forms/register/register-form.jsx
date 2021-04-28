@@ -8,11 +8,11 @@ const SignUpForm = () => (
         const errors = {};
 
         if (!values.name) {
-          errors.email = "Required";
+          errors.name = "Required";
         }
 
         if (!values.surname) {
-          errors.email = "Required";
+          errors.surname = "Required";
         }
 
         if (!values.birthDate) {
