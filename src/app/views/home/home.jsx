@@ -10,20 +10,21 @@ import { Card } from "../../components/card/card";
 import { SignUpModal } from "../../components/modal/sign-up";
 
 export function HomePage() {
-  const [beers, setBeers] = useState([]);
   const [sortParam, setSortParam] = useState("name");
+  const [beers, setBeers] = useState([]);
 
   useEffect(() => {
     fetchBeers()
       .then((response) => setBeers(response.sort((a, b) => sortBeers(a, b))))
-      .catch((e) => console.log("Beer fetching failed"));
-  }, [sortParam]);
+      .catch((e) => console.log("Beer fetching failed. " + e));
+  }, []);
 
   const changeSortMethod = ({ target }) => {
-    setSortParam(target.id);
+    setSortParam(() => target.id);
+    setBeers(beers.sort((a, b) => sortBeers(a, b, target.id)));
   };
 
-  function sortBeers(beerA, beerB) {
+  function sortBeers(beerA, beerB, param = sortParam) {
     function compareDatesFromStrings(stringA, stringB) {
       function getDateFromString(string) {
         const dateArray = string.split("/");
@@ -37,15 +38,15 @@ export function HomePage() {
       return stringA.localeCompare(stringB);
     }
 
-    switch (sortParam) {
+    switch (param) {
       case "abv":
-        return beerA[sortParam] - beerB[sortParam];
+        return beerA[param] - beerB[param];
 
       case "name":
-        return compareNameStrings(beerA[sortParam], beerB[sortParam]);
+        return compareNameStrings(beerA[param], beerB[param]);
 
       case "first_brewed":
-        return compareDatesFromStrings(beerA[sortParam], beerB[sortParam]);
+        return compareDatesFromStrings(beerA[param], beerB[param]);
 
       default:
         return 0;
@@ -64,14 +65,9 @@ export function HomePage() {
             </div>
             <div className="header__sort col-12 col-md-6 d-flex justify-content-end align-items-center">
               <p className="m-0 mr-2 font-weight-bold text-light">Sort by:</p>
-              <div
-                className="btn-group btn-group-toggle"
-                data-toggle="buttons"
-                onChange={changeSortMethod}
-                defaultChecked={sortParam}
-              >
+              <div className="btn-group btn-group-toggle" data-toggle="buttons" onChange={changeSortMethod}>
                 <label className="btn btn-warning active">
-                  <input type="radio" name="options" id="name" /> Name
+                  <input type="radio" name="options" id="name" defaultChecked /> Name
                 </label>
                 <label className="btn btn-warning">
                   <input type="radio" name="options" id="abv" /> ABV
