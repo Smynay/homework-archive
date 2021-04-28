@@ -93,13 +93,13 @@ export function HomePage() {
             <div className="header__sort col-12 col-md-6 d-flex justify-content-end align-items-center">
               <p className="m-0 mr-2 font-weight-bold text-light">Sort by:</p>
               <div className="btn-group btn-group-toggle" data-toggle="buttons" onChange={changeSortMethod}>
-                <label className="btn btn-warning active">
+                <label className="btn btn-warning active shadow-none">
                   <input type="radio" name="options" id="name" defaultChecked /> Name
                 </label>
-                <label className="btn btn-warning">
+                <label className="btn btn-warning shadow-none">
                   <input type="radio" name="options" id="abv" /> ABV
                 </label>
-                <label className="btn btn-warning">
+                <label className="btn btn-warning shadow-none">
                   <input type="radio" name="options" id="first_brewed" /> First brewed
                 </label>
               </div>
