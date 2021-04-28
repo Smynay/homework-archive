@@ -44,7 +44,7 @@ const SignUpForm = () => (
     >
       {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
         <form onSubmit={handleSubmit}>
-          <label for="inputName">Name</label>
+          <label htmlFor="inputName">Name</label>
           <input
             id="inputName"
             type="text"
@@ -55,7 +55,7 @@ const SignUpForm = () => (
             value={values.name}
           />
           <p className="text-danger">{errors.name && touched.name && errors.name}</p>
-          <label for="inputSurname">Surname</label>
+          <label htmlFor="inputSurname">Surname</label>
           <input
             id="inputSurname"
             type="text"
@@ -66,7 +66,7 @@ const SignUpForm = () => (
             value={values.surname}
           />
           <p className="text-danger">{errors.surname && touched.surname && errors.surname}</p>
-          <label for="inputBirthDate">BirthDay</label>
+          <label htmlFor="inputBirthDate">BirthDay</label>
           <input
             id="inputBirthDate"
             type="date"
@@ -77,7 +77,7 @@ const SignUpForm = () => (
             value={values.birthDate}
           />
           <p className="text-danger">{errors.birthDate && touched.birthDate && errors.birthDate}</p>
-          <label for="inputEmail">Email address</label>
+          <label htmlFor="inputEmail">Email address</label>
           <input
             id="inputEmail"
             type="email"
@@ -88,18 +88,18 @@ const SignUpForm = () => (
             value={values.email}
           />
           <p className="text-danger">{errors.email && touched.email && errors.email}</p>
-          <label for="inputPassword">Password</label>
+          <label htmlFor="inputPassword">Password</label>
           <input
             id="inputPassword"
             type="password"
             name="password"
-            class="form-control"
+            className="form-control"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.password}
           />
-          <p class="text-danger">{errors.password && touched.password && errors.password}</p>
-          <button type="submit" class="btn btn-warning" disabled={isSubmitting || errors}>
+          <p className="text-danger">{errors.password && touched.password && errors.password}</p>
+          <button type="submit" className="btn btn-warning" disabled={isSubmitting || errors}>
             Submit
           </button>
         </form>
