@@ -21,6 +21,7 @@ export function HomePage() {
         setBeersToView(response.sort((a, b) => sortBeers(a, b)));
       })
       .catch((e) => console.log("Beer fetching failed. " + e));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const changeSortMethod = ({ target }) => {
