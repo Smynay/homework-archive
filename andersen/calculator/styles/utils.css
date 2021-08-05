@@ -1,0 +1,17 @@
+.bradius{
+  border-radius: 20px;
+}
+
+.mzero{
+  margin: 0 auto;
+}
+
+.flex-col{
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+}
